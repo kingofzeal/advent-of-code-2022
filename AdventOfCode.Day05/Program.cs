@@ -45,10 +45,7 @@ void Part1()
         }
     }
 
-    foreach (var stack in stacks)
-    {
-        Console.WriteLine(stack.First());
-    }
+    Console.WriteLine(string.Join(string.Empty, stacks.Select(x => x.First())));
 }
 
 void Part2()
@@ -61,10 +58,7 @@ void Part2()
         stacks[from - 1].RemoveRange(0, ct);
     }
 
-    foreach (var stack in stacks)
-    {
-        Console.WriteLine(stack.First());
-    }
+    Console.WriteLine(string.Join(string.Empty, stacks.Select(x => x.First())));
 }
 
 Part2();
