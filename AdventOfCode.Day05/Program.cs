@@ -28,8 +28,8 @@ var instructions = File.ReadAllText("input.txt")
     .Select(x => x.Split(' '))
     .Select(x => new ValueTuple<int, int, int>(
         int.Parse(x[1]),
-        int.Parse(x[3]),
-        int.Parse(x[5])))
+        int.Parse(x[3]) - 1,
+        int.Parse(x[5]) - 1))
     .ToList();
 
 void Part1()
@@ -38,10 +38,10 @@ void Part1()
     {
         for (var i = 1; i <= ct; i++)
         {
-            stacks[to - 1].Reverse();
-            stacks[to - 1].Add(stacks[from - 1].First());
-            stacks[to - 1].Reverse();
-            stacks[from - 1].RemoveAt(0);
+            stacks[to].Reverse();
+            stacks[to].Add(stacks[from].First());
+            stacks[to].Reverse();
+            stacks[from].RemoveAt(0);
         }
     }
 
@@ -52,10 +52,10 @@ void Part2()
 {
     foreach (var (ct, from, to) in instructions)
     {
-        stacks[to - 1].Reverse();
-        stacks[to - 1].AddRange(stacks[from - 1].Take(ct).Reverse());
-        stacks[to - 1].Reverse();
-        stacks[from - 1].RemoveRange(0, ct);
+        stacks[to].Reverse();
+        stacks[to].AddRange(stacks[from].Take(ct).Reverse());
+        stacks[to].Reverse();
+        stacks[from].RemoveRange(0, ct);
     }
 
     Console.WriteLine(string.Join(string.Empty, stacks.Select(x => x.First())));
