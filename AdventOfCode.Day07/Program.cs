@@ -1,5 +1,3 @@
-using AdventOfCode.Day07;
-
 AocFolder ProcessCommands()
 {
     var instructions = File.ReadAllText("input.txt")
@@ -111,3 +109,27 @@ var res = ProcessCommands();
 
 Part1(res);
 Part2(res);
+
+//---------Models
+
+public class AocFolder
+{
+    public AocFolder(string name, AocFolder? parent)
+    {
+        Name = name;
+        Parent = parent;
+    }
+
+    public string Name { get; set; }
+    public List<AocFolder> Folders { get; set; } = new();
+    public List<AocFile> Files { get; set; } = new();
+    public AocFolder? Parent { get; set; }
+
+    public int Size => Folders.Sum(x => x.Size) + Files.Sum(x => x.Size);
+}
+
+public class AocFile
+{
+    public int Size { get; set; }
+    public string Name { get; set; }
+}
